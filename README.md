@@ -23,7 +23,8 @@ Walkthrough of the live dashboard (register → flags → evaluate → rollouts 
 
 **Files in this repo:** [demo video](demo/out/flagforge-demo.webm) · [screenshots](demo/screens/)
 
-If the player is blank on some browsers, open the WebM link above (Chrome / Edge / Firefox play it natively).
+[flagforge-demo.webm](https://github.com/user-attachments/assets/cc7ed7bf-dc86-48d2-87fa-daeb8cbd85e2)
+
 
 ---
 
