@@ -23,7 +23,7 @@ Walkthrough of the live dashboard (register → flags → evaluate → rollouts 
 
 **Files in this repo:** [demo video](demo/out/flagforge-demo.webm) · [screenshots](demo/screens/)
 
-[flagforge-demo.webm](https://github.com/user-attachments/assets/cc7ed7bf-dc86-48d2-87fa-daeb8cbd85e2)
+https://github.com/user-attachments/assets/8d1bbff2-73af-448a-9b0d-80f890150223
 
 
 ---
