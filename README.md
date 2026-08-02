@@ -9,6 +9,10 @@ Built with **Spring Boot 4 · Java 21 · CQRS · JWT** and **React · Redux Tool
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+### Why this project?
+
+Shipping features behind a full deploy is slow and risky. Feature flags let you turn capabilities on for a slice of users, roll out gradually, or run variants—without rebuilding the app for every change. FlagForge is a hands-on implementation of that idea: sticky evaluation, progressive rollouts, a dashboard for operators, and an SDK-style evaluate API for clients. It was built to explore clean backend design (CQRS, sagas, dual auth) end to end, not only to sketch architecture on a whiteboard.
+
 ---
 
 ## Demo
@@ -25,6 +29,10 @@ Walkthrough of the live dashboard (register → flags → evaluate → rollouts 
 
 https://github.com/user-attachments/assets/8d1bbff2-73af-448a-9b0d-80f890150223
 
+| Flags list | Evaluate (sticky bucket) | Progressive rollout |
+|:---:|:---:|:---:|
+| ![Flags list](demo/screens/03-flags-list.png) | ![Evaluate](demo/screens/05-evaluate.png) | ![Rollouts](demo/screens/06-rollouts.png) |
+| Manage flags across environments | Subject evaluation with bucket & reason | Step-wise percentage sagas |
 
 ---
 
@@ -154,6 +162,16 @@ flagforge/
 | Database | H2 in-memory | Postgres (`docker`) |
 | Flag cache | Memory | Redis (`redis-kafka` / `docker`) |
 | Domain events | Logging | Kafka (`redis-kafka` / `docker`) |
+
+### Key design decisions
+
+- **CQRS** — Flag and rollout **writes** go through command handlers (validation, audit, cache refresh, events). **Reads** (list/get flags, evaluate orchestration) stay on the query side so the hot evaluate path is not tangled with admin mutations.
+- **Sticky bucketing (`CRC32`)** — `bucket = CRC32(flagKey + ":" + subjectId) % 100` gives a stable 0–99 slot per subject. Percentage flags use `bucket < percentage`; multivariate maps the same bucket onto weighted variants. No session store—any instance returns the same answer for the same subject.
+- **Dual auth** — Operators use **JWT** (roles: VIEWER / EDITOR / ADMIN). Client apps use **API keys** (`X-API-Key`) on `/api/v1/sdk/**`, optionally scoped to one environment, so production evaluate traffic does not share dashboard sessions.
+- **Progressive rollout sagas** — Percentage flags can step through ladders (e.g. 0→10→25→50→100) with start / advance / rollback. One **RUNNING** saga per flag; rollback disables the flag and restores the first step—controlled canaries without ad-hoc percentage edits only.
+- **Cache: memory vs Redis** — Evaluate loads a flag **snapshot** from cache first (DB on miss). **Memory** is zero-deps for local mode; **Redis** shares cache across instances when you scale out.
+- **Events: logging vs Kafka** — After successful writes, domain events are published. **Logging** is enough for local demos; **Kafka** is the same port with a real bus for audit or downstream consumers. Evaluate itself does not depend on Kafka.
+- **Trade-offs** — H2 data is ephemeral; targeting is subject-sticky (no full attribute rule engine yet); multivariate shares a 0–99 bucket space (few arms are realistic); launcher modes set profiles explicitly—the app does not auto-detect Redis/Kafka/Postgres.
 
 ---
 
