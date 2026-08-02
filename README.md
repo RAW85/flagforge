@@ -19,13 +19,12 @@ Shipping features behind a full deploy is slow and risky. Feature flags let you 
 
 Walkthrough of the live dashboard (register → flags → evaluate → rollouts → API keys → users).
 
-<!-- GitHub renders this on the repo home page once the file is on the default branch -->
-<video src="demo/out/flagforge-demo.webm" controls width="100%" poster="demo/screens/03-flags-list.png">
+<video src="demo/out/flagforge-demo.mp4" controls width="100%" poster="demo/screens/03-flags-list.png">
   Your browser does not support embedded video.
-  <a href="demo/out/flagforge-demo.webm">Download the demo video (WebM)</a>
+  <a href="demo/out/flagforge-demo.mp4">Download the demo video (MP4)</a>
 </video>
 
-**Files in this repo:** [demo video](demo/out/flagforge-demo.webm) · [screenshots](demo/screens/)
+**Files in this repo:** [demo video (MP4)](demo/out/flagforge-demo.mp4) · [screenshots](demo/screens/)
 
 https://github.com/user-attachments/assets/8d1bbff2-73af-448a-9b0d-80f890150223
 

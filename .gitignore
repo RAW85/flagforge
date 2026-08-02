@@ -32,13 +32,11 @@ frontend/blob-report/
 frontend/.vite/
 frontend/*.tsbuildinfo
 frontend/out/
-# temp copies if someone runs demo scripts from frontend/
-frontend/screens/
-frontend/capture-demo.mjs
-frontend/record-demo.mjs
 
-# --- Demo (keep video + screens; ignore recorder scratch) ---
+# --- Demo (keep screens/ + out/*.mp4 in git; ignore local scratch) ---
 demo/out/raw/
+demo/tools/
+demo/**/*.webm
 
 # --- IDE / editors ---
 .idea/
