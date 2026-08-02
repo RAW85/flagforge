@@ -19,14 +19,9 @@ Shipping features behind a full deploy is slow and risky. Feature flags let you 
 
 Walkthrough of the live dashboard (register → flags → evaluate → rollouts → API keys → users).
 
-<video src="demo/out/flagforge-demo.mp4" controls width="100%" poster="demo/screens/03-flags-list.png">
-  Your browser does not support embedded video.
-  <a href="demo/out/flagforge-demo.mp4">Download the demo video (MP4)</a>
-</video>
+https://github.com/user-attachments/assets/8d1bbff2-73af-448a-9b0d-80f890150223
 
 **Files in this repo:** [demo video (MP4)](demo/out/flagforge-demo.mp4) · [screenshots](demo/screens/)
-
-https://github.com/user-attachments/assets/8d1bbff2-73af-448a-9b0d-80f890150223
 
 | Flags list | Evaluate (sticky bucket) | Progressive rollout |
 |:---:|:---:|:---:|
